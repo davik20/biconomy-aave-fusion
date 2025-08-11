@@ -1,6 +1,6 @@
 {
   "name": "@biconomy/mee-fusion-demo",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Complete Biconomy MEE Node Integration with abstract.js SDK and AAVE Protocol demonstrating Fusion Supertransactions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
