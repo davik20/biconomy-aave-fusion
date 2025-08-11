@@ -99,16 +99,19 @@ function extractErrorMessage(error: unknown): string {
   }
   
   if (error && typeof error === 'object') {
-    const errorObj = error as any;
+    const errorObj = error as Record<string, unknown>;
     
     // Handle ethers errors
-    if (errorObj.reason) return errorObj.reason;
-    if (errorObj.message) return errorObj.message;
-    if (errorObj.error?.message) return errorObj.error.message;
+    if (typeof errorObj.reason === 'string') return errorObj.reason;
+    if (typeof errorObj.message === 'string') return errorObj.message;
+    if (errorObj.error && typeof errorObj.error === 'object') {
+      const nestedError = errorObj.error as Record<string, unknown>;
+      if (typeof nestedError.message === 'string') return nestedError.message;
+    }
     
     // Handle viem errors
-    if (errorObj.shortMessage) return errorObj.shortMessage;
-    if (errorObj.details) return errorObj.details;
+    if (typeof errorObj.shortMessage === 'string') return errorObj.shortMessage;
+    if (typeof errorObj.details === 'string') return errorObj.details;
   }
   
   return 'Unknown error occurred';

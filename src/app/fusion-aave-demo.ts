@@ -151,7 +151,7 @@ async function executeFusionTransaction(
         address: sdk.config.contracts.usdc,
         chainId: sdk.config.chainId,
       },
-    } as any);
+    });
 
     log.info('Executing Fusion quote...');
     const { hash } = await sdk.meeClient.executeFusionQuote({ fusionQuote });
@@ -165,7 +165,7 @@ async function executeFusionTransaction(
 
     const executionTime = Date.now() - startTime;
 
-    if ((receipt as any).success === false) {
+    if (receipt.transactionStatus === 'FAILED' || receipt.transactionStatus === 'MINED_FAIL') {
       // Extract detailed error information from the receipt
       const errorDetails = extractErrorDetails(receipt);
       throw new TransactionError(`Fusion transaction failed: ${errorDetails}`);

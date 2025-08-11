@@ -4,6 +4,7 @@
 
 import type { Address, Hex } from 'viem';
 import type { MeeClient } from '@biconomy/abstractjs';
+import type { MultichainSmartAccount } from '@biconomy/abstractjs';
 import type { ethers } from 'ethers';
 
 // Configuration Types
@@ -23,7 +24,7 @@ export interface ContractAddresses {
 
 // SDK Types
 export interface SDKContext {
-  readonly orchestrator: any; // Nexus account instance
+  readonly orchestrator: MultichainSmartAccount; // Proper Nexus account type
   readonly meeClient: MeeClient; // Required for Fusion features
   readonly signer: ethers.Wallet;
   readonly provider: ethers.JsonRpcProvider;
@@ -31,18 +32,72 @@ export interface SDKContext {
   readonly eoaAddress: Address;
 }
 
-// Transaction Types
-export interface FusionQuoteRequest {
-  readonly instructions: readonly FusionInstruction[];
-  readonly trigger: TriggerConfig;
-  readonly feeToken: FeeTokenConfig;
+// MEE Node Info Types
+export interface MeeNodeInfo {
+  readonly version?: string;
+  readonly status?: string;
+  readonly [key: string]: unknown;
 }
 
+// Transaction Types - Updated to match actual MEE API
+export interface FusionQuoteRequest {
+  readonly instructions: readonly Instruction[];
+  readonly trigger: TokenTrigger;
+  readonly feeToken?: FeeTokenInfo;
+}
+
+export interface Instruction {
+  readonly to: Address;
+  readonly data?: Hex;
+  readonly value?: bigint;
+  readonly gasLimit?: bigint;
+}
+
+export interface TokenTrigger {
+  readonly tokenAddress: Address;
+  readonly chainId: number;
+  readonly amount?: bigint;
+  readonly useMaxAvailableFunds?: boolean;
+  readonly recipientAddress?: Address;
+  readonly gasLimit?: bigint;
+}
+
+export interface FeeTokenInfo {
+  readonly address: Address;
+  readonly chainId: number;
+}
+
+// Receipt Types
+export interface SupertransactionReceipt {
+  readonly transactionStatus: 'SUCCESS' | 'MINING' | 'MINED_SUCCESS' | 'MINED_FAIL' | 'FAILED' | 'PENDING';
+  readonly hash: Hex;
+  readonly receipts?: readonly any[];
+  readonly explorerLinks?: readonly string[];
+  readonly userOps?: readonly any[];
+  readonly [key: string]: unknown;
+}
+
+// Legacy types (kept for backward compatibility but marked as deprecated)
+/** @deprecated Use TokenTrigger instead */
+export interface TriggerConfig {
+  readonly chainId: number;
+  readonly tokenAddress: Address;
+  readonly amount: bigint;
+}
+
+/** @deprecated Use FeeTokenInfo instead */
+export interface FeeTokenConfig {
+  readonly address: Address;
+  readonly chainId: number;
+}
+
+/** @deprecated Use Instruction instead */
 export interface FusionInstruction {
   readonly type: 'default' | 'batch' | 'multicall';
   readonly data: InstructionData;
 }
 
+/** @deprecated Use Instruction instead */
 export interface InstructionData {
   readonly abi: readonly any[];
   readonly chainId: number;
@@ -50,17 +105,6 @@ export interface InstructionData {
   readonly functionName: string;
   readonly args: readonly any[];
   readonly value?: bigint;
-}
-
-export interface TriggerConfig {
-  readonly chainId: number;
-  readonly tokenAddress: Address;
-  readonly amount: bigint;
-}
-
-export interface FeeTokenConfig {
-  readonly address: Address;
-  readonly chainId: number;
 }
 
 // Balance Types

@@ -12,7 +12,7 @@ import { http, type Chain } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { mainnet } from 'viem/chains';
 
-import type { SDKContext } from '../types';
+import type { SDKContext, MeeNodeInfo } from '../types';
 import { log } from '../utils/logger';
 import { withErrorHandling, SDKError, InfrastructureError } from '../utils/errors';
 import { createConfig } from '../utils/config';
@@ -96,15 +96,15 @@ export const initializeBiconomySDK = withErrorHandling(
       );
     }
     
-    const nodeInfo = await response.json() as any;
+    const nodeInfo = await response.json() as MeeNodeInfo;
     log.info('MEE Node is operational', {
       version: nodeInfo.version || 'unknown',
       url: config.meeNodeUrl,
     });
 
     const meeClient = await createMeeClient({
-      account: orchestrator as any,
-      url: config.meeNodeUrl as any,
+      account: orchestrator,
+      url: config.meeNodeUrl as `http://${string}` | `https://${string}`,
     });
 
     log.success('MEE Client initialized - Fusion features ready');

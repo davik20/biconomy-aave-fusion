@@ -86,8 +86,8 @@ src/
 
 ```bash
 # Clone and install
-git clone 
-cd biconomy-mee-fusion-demo
+git clone https://github.com/davik20/biconomy-aave-fusion?tab=readme-ov-file
+cd biconomy-aave-fusion
 npm install
 npm run typecheck
 ```
@@ -97,7 +97,6 @@ npm run typecheck
 ```bash
 # Copy environment template
 cp env.example .env
-nano .env
 ```
 
 **Required Environment Variables:**
@@ -215,7 +214,6 @@ Fusion transaction completed (38s)
 Final Results:
   Supply Amount: 50.0000 USDC
   aTokens Received: 49.9999 aUSDC
-  Gas Fees: 19.6 USDC
 
 Transaction completed successfully
 ```
