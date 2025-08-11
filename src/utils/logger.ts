@@ -122,7 +122,7 @@ export class Logger {
 
 // Convenience export
 export const logger = Logger.getInstance(
-  (process.env.LOG_LEVEL as LogLevel) || 'info'
+  (process.env.LOG_LEVEL as LogLevel) || 'debug'
 );
 
 export const log = {

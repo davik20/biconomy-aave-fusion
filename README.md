@@ -86,7 +86,7 @@ src/
 
 ```bash
 # Clone and install
-git clone https://github.com/davik20/biconomy-aave-fusion?tab=readme-ov-file
+git clone https://github.com/davik20/biconomy-aave-fusion
 cd biconomy-aave-fusion
 npm install
 npm run typecheck
@@ -399,11 +399,11 @@ await ensureSufficientUSDC(sdk, targetUSDCAmount);
 
 ### Comprehensive Logging System
 ```typescript
-log.box('Transaction Successful!', [
-  `Supply Amount: ${formatTokenAmount(result.supplyAmount, 6, 'USDC')}`,
-  `aTokens Received: ${formatTokenAmount(result.aTokensReceived, 6, 'aUSDC')}`,
-  // ... more details
-], 'green');
+log.success('Transaction Successful!', {
+  supplyAmount: formatTokenAmount(result.supplyAmount, 6, 'USDC'),
+  aTokensReceived: formatTokenAmount(result.aTokensReceived, 6, 'aUSDC'),
+  transactionHash: result.hash,
+});
 ```
 
 ## Project Capabilities
