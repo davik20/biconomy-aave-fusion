@@ -1,0 +1,47 @@
+{
+    "name": "Sonic",
+    "rpc": "<YOUR RPC URL (debug_traceCall enabled)>",
+    "isTestChain": false,
+    "chainId": "146",
+    "type": "evm",
+    "eip1559": true,
+    "price": {
+        "chainId": "146",
+        "oracle": "0xc76dFb89fF298145b417d221B2c747d84952e01d"
+    },
+    "handleOpsDeposit": "5",
+    "paymentTokens": [
+        {
+            "name": "S",
+            "address": "0x0000000000000000000000000000000000000000",
+            "symbol": "S",
+            "decimals": 18,
+            "price": {
+                "chainId": "146",
+                "oracle": "0xc76dFb89fF298145b417d221B2c747d84952e01d"
+            }
+        },
+        {
+            "name": "USDC",
+            "address": "0x29219dd400f2bf60e5a23d13be72b486d4038894",
+            "symbol": "USDC",
+            "decimals": 6,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            },
+            "permitEnabled": true
+        },
+        {
+            "name": "Tether USD",
+            "address": "0x6047828dc181963ba44974801ff68e538da5eaf9",
+            "symbol": "USDT",
+            "decimals": 6,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            },
+            "permitEnabled": true
+        }
+    ]
+}

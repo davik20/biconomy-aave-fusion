@@ -1,0 +1,35 @@
+{
+    "name": "ApeChain",
+    "rpc": "<YOUR RPC URL (debug_traceCall enabled)>",
+    "isTestChain": false,
+    "chainId": "33139",
+    "type": "arbitrum",
+    "eip1559": true,
+    "price": {
+        "chainId": "1",
+        "oracle": "0x88db96ca551e0A0a2D8646999410b60197979311"
+    },
+    "handleOpsDeposit": "0.025",
+    "paymentTokens": [
+        {
+            "name": "APE",
+            "address": "0x0000000000000000000000000000000000000000",
+            "symbol": "APE",
+            "decimals": 18,
+            "price": {
+                "chainId": "1",
+                "oracle": "0x88db96ca551e0A0a2D8646999410b60197979311"
+            }
+        },
+        {
+            "name": "Wrapped ApeCoin",
+            "address": "0x48b62137edfa95a428d35c09e44256a739f6b557",
+            "symbol": "WAPE",
+            "decimals": 18,
+            "price": {
+                "chainId": "1",
+                "oracle": "0x88db96ca551e0A0a2D8646999410b60197979311"
+            }
+        }
+    ]
+}

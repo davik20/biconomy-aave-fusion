@@ -1,0 +1,58 @@
+{
+    "name": "Gnosis",
+    "rpc": "<YOUR RPC URL (debug_traceCall enabled)>",
+    "isTestChain": false,
+    "chainId": "100",
+    "type": "evm",
+    "eip1559": true,
+    "price": {
+        "value": "1",
+        "decimals": "0"
+    },
+    "handleOpsDeposit": "2",
+    "paymentTokens": [
+        {
+            "name": "xDAI",
+            "address": "0x0000000000000000000000000000000000000000",
+            "symbol": "xDAI",
+            "decimals": 18,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            }
+        },
+        {
+            "name": "GNO",
+            "address": "0x9c58bacc331c9aa871afd802db6379a98e80cedb",
+            "symbol": "GNO",
+            "decimals": 18,
+            "price": {
+                "chainId": "100",
+                "oracle": "0x22441d81416430A54336aB28765abd31a792Ad37"
+            },
+            "permitEnabled": true
+        },
+        {
+            "name": "USDC",
+            "address": "0xddafbb505ad214d7b80b1f830fccc89b60fb7a83",
+            "symbol": "USDC",
+            "decimals": 6,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            },
+            "permitEnabled": true
+        },
+        {
+            "name": "Tether USD",
+            "address": "0x4ecaba5870353805a9f068101a40e0f32ed605c6",
+            "symbol": "USDT",
+            "decimals": 6,
+            "price": {
+                "value": "1",
+                "decimals": "0"
+            },
+            "permitEnabled": true
+        }
+    ]
+}

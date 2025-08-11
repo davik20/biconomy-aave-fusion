@@ -1,0 +1,29 @@
+services:
+    node:
+        image: bcnmy/mee-node:1.1.94
+        restart: on-failure
+        environment:
+          - KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+          - PORT=3000
+          - REDIS_HOST=redis
+          - REDIS_PORT=6379
+          - DOCS_URL=https://documenter.getpostman.com/view/33713944/2sAYBd99Ec
+        ports:
+          - "3000:3000"
+        links:
+          - redis
+        volumes:
+          - ./logs:/usr/src/app/logs
+          - ./keystore:/usr/src/app/keystore
+          - ./chains-local:/usr/src/app/chains
+    redis:
+        image: redis:alpine
+        restart: always
+        command: redis-server --dir /data --save 60 1 --appendonly yes --loglevel warning
+        volumes:
+          - ./redis-data:/data
+volumes:
+    keystore:
+    chains:
+    redis-data:
+    logs:

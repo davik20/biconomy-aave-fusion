@@ -1,0 +1,50 @@
+{
+  "name": "@biconomy/mee-fusion-demo",
+  "version": "2.0.0",
+  "description": "Complete Biconomy MEE Node Integration with abstract.js SDK and AAVE Protocol demonstrating Fusion Supertransactions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "biconomy",
+    "mee",
+    "abstractjs",
+    "aave",
+    "fusion",
+    "supertransaction",
+    "smart-accounts",
+    "anvil",
+    "ethereum"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "setup": "cp env.example .env && echo 'Environment template copied. Please edit .env with your configuration.'",
+    
+    "infra:anvil": "bash scripts/start-anvil.sh",
+    "infra:mee": "bash scripts/start-mee-node.sh",
+    "infra:status": "npm run infra:check:anvil && npm run infra:check:mee",
+    "infra:check:anvil": "curl -s -X POST -H 'Content-Type: application/json' --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_blockNumber\",\"params\":[],\"id\":1}' http://localhost:8545 > /dev/null && echo 'Anvil is running on port 8545' || echo 'Anvil is not running on port 8545'",
+    "infra:check:mee": "curl -s -f http://localhost:3000/v3/info > /dev/null && echo 'MEE Node is running on port 3000' || echo 'MEE Node is not running on port 3000'",
+    
+    "infra:stop:anvil": "pkill -f 'anvil' || echo 'No Anvil processes found'",
+    "infra:stop:mee": "docker compose down",
+    "infra:stop:all": "npm run infra:stop:mee && npm run infra:stop:anvil",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@biconomy/abstractjs": "^1.0.22",
+    "dotenv": "^17.2.1",
+    "ethers": "^6.15.0",
+    "viem": "^2.33.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

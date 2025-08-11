@@ -1,0 +1,17 @@
+node_modules
+.env
+.env.local
+dist/
+*.tsbuildinfo
+.vscode/
+.idea/
+.DS_Store
+*.log
+logs/
+coverage/
+.npm
+.eslintcache
+keystore/
+redis-data/
+*.tmp
+*.temp
